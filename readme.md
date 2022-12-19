@@ -8,6 +8,9 @@
 Чтобы запустить систему управления вам необоходимо:
 
 1. Клонируйте репозиторий к себе
-    git clone https://github.com/yuuua123/bazadannih.git
+   git clone https://github.com/yuuua123/bazadannih.git
 2. Зайти в соответсвующий репозиторий на своем компьютере
-3. 
+3. Установить все необходимы зависимости с помощью команды python3 -m pip install -r requirements.txt
+4. Устаонвить postgreSQL
+5. Создать в postreSQL необходимую структуру
+6. Запустить систему управления
