@@ -79,15 +79,14 @@ def update(cur):
     connection.commit()
     return None
 
-if __name__=='main':
+if __name__=='__main__':
+    
     #Ввод данных пользавателя
     userName=input('Введите имя пользователя: ')
     passWord=input('Введите пароль: ')
     connection = connect(userName,passWord)
-
     #Открытия курсора для выполнения скриптов
     cur = connection.cursor()
-
     #Меню для работы в терминале
     x=input('''Введите действие которое хотите сделать
     1 - Select
