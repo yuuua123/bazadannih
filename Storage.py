@@ -11,9 +11,18 @@ def connect(username1,password1):
 
 #Фукнция выбора поле из таблиц
 def select(cur):
-    fields=input('Введите какие поля нужно выбрать через запятую: ')
+    '''
+    :param cur: Параметр cur необходим для того что бы мы могли работать с коннектом к базе и выполнять по нему скрипты
+    :cur type: psycorg2.connect.cursor()
+    :return: rows - результат селекта
+    :rtype: list(list())
+    '''
+    fields = input('Введите какие поля нужно выбрать через запятую: ')
     table = input('Введите таблицу из которой нужно выбрать: ')
     where = input('Введите условия если необходимо, если оно не нужно просто нажмите Enter: ')
+    print(table)
+    print(fields)
+    print(where)
     if where !='': # Условие на случий если нету блока where
         cur.execute('select '+fields+' from public.'+table+' where '+where)
     if where =='': # Условия на случай если есть блок where
@@ -21,10 +30,16 @@ def select(cur):
     rows = cur.fetchall() # Обработка всех записей
     print(rows) # вывод всех записей
     print('Select done')
-    return None
+    return rows
 
 #Фукнция вставки данных
 def insert(cur):
+    '''
+    :param cur: Параметр cur необходим для того что бы мы могли работать с коннектом к базе и выполнять по нему скрипты
+    :cur type: psycorg2.connect.cursor()
+    :return: None (Функция вставляет данные, так что результат работы не является нужным для возвращения)
+    :rtype: None
+    '''
     table = input('Введите таблицу в которую нужно добавить запись: ')
     cur.execute("select column_name,data_type from information_schema.columns where column_name!='id' and table_name = '"+table+"'")# Выбираем все поля которые нам нужно вставить из служебной таблицы
     columns={}
@@ -52,6 +67,12 @@ def insert(cur):
 
 #Функция удаления
 def delete(cur):
+    '''
+    :param cur: Параметр cur необходим для того что бы мы могли работать с коннектом к базе и выполнять по нему скрипты
+    :cur type: psycorg2.connect.cursor()
+    :return: None (Функция удаляет данные, так что результат работы не является нужным для возвращения)
+    :rtype: None
+    '''
     table = input('Введите таблицу в которую нужно удалить запись: ')
     where = input('Введите условие удаления, если нужно почистить всю таблицу(крайне не рекомендуется) то просто ничего не вбивайте: ')
     #Обработка условий
@@ -66,9 +87,16 @@ def delete(cur):
 
 #Функция обновления записи
 def update(cur):
+    '''
+    :param cur: Параметр cur необходим для того что бы мы могли работать с коннектом к базе и выполнять по нему скрипты
+    :cur type: psycorg2.connect.cursor()
+    :return: None (Функция Обновляет данные, так что результат работы не является нужным для возвращения)
+    :rtype: None
+    '''
     table = input('Введите таблицу в которую нужно обновить запись: ')
     where = input('Введите условие по которому надо обновить запись, если нужно обновить записи просто нажмите enter: ')
     set = input('Введите поле, и значение обновления в формате поле = значение: ')
+
     #обработка условий
     if where !='':
         update_sql="update public."+table+" set "+set+" where "+where
